@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "lint": "eslint --ext js,jsx,ts,tsx src/",
     "lint:fix": "eslint --fix --ext js,jsx,ts,tsx src/",
-    "format": "prettier --write --ext js,jsx,ts,tsx,md,json src/' --config ./.prettierrc"
+    "format": "prettier --write src/ --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
