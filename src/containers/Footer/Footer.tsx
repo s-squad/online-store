@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CustomContainer } from '../CustomContainer';
 
 import styles from './Footer.module.scss';
@@ -27,7 +25,7 @@ export const Footer = () => {
           <p>Copyright © All Rights Reserved.</p>
           <a href='https://rs.school/js/' title='The Rolling Scopes JavaScript/Front-end.'>
             <img
-              src={process.env.PUBLIC_URL + 'rs_logo.svg'}
+              src={`${process.env.PUBLIC_URL}/rs_logo.svg`}
               width='150'
               height='50'
               alt='The Rolling Scopes JavaScript/Front-end.'
