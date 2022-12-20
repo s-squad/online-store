@@ -1,4 +1,3 @@
-import React from 'react';
 import { CustomContainer } from '../../containers/CustomContainer';
 
 import styles from './StorePage.module.scss';

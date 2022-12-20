@@ -6,7 +6,7 @@ import styles from './Search.module.scss';
 export const Search = () => {
   const [visabilityInput, setVisabilityInput] = useState(false);
   const [searchVal, setSearchVal] = useState('');
-  const [_, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const toggleInput = () => setVisabilityInput((prev) => !prev);
 
