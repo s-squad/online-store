@@ -1,7 +1,6 @@
-import React from 'react';
 
 import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage = () => {
-  return <div>NotFoundPage</div>;
+  return <div className={styles.main}>NotFoundPage</div>;
 };
