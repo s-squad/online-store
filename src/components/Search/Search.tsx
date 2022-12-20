@@ -6,7 +6,7 @@ import styles from './Search.module.scss';
 
 export const Search = () => {
   const [searchVal, setSearchVal] = useState('');
-  const [_, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;

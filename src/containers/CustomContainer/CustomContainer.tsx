@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CustomContainerProps } from './CustomContainer.props';
 import styles from './CustomContainer.module.scss';
 
