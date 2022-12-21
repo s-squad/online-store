@@ -1,0 +1,30 @@
+@mixin flex ($direction, $justifyContent, $alignItems) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+
+@mixin scale ($transitionDuration) {
+    transition: $transitionDuration ease;
+    transform: scale(1);
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+@mixin btn-color ($color, $transitionDuration) {
+    transition: $transitionDuration ease;
+    &:hover,
+    &:active {
+        color: $color;
+    }
+}
+
+@mixin bg-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
