@@ -1,0 +1,24 @@
+.footer {
+  background: #fafafa;
+  color: #555555;
+}
+.bottom {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.link {
+  padding: 0 5px;
+  color: inherit;
+  text-decoration: none;
+  transition: all ease-in-out 0.5s;
+  &:hover {
+    color: #dd8560;
+    text-decoration: underline;
+  }
+}
