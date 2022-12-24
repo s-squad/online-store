@@ -1,4 +1,3 @@
-
 import { CustomContainer } from '../../containers/CustomContainer';
 
 import styles from './CartPage.module.scss';
