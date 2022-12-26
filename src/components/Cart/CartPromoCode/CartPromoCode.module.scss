@@ -62,6 +62,12 @@
   gap: 1em;
   list-style: none;
 }
+
+.promoMessage {
+  display: inline-block;
+  padding: 1rem 0;
+}
+
 .promoCodeTextItem {
   padding: 0.5em 1em;
   cursor: pointer;
@@ -75,4 +81,8 @@
 
 .succes {
   color: $color-success;
+}
+
+.crossed {
+  padding: 0.5rem;
 }

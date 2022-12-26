@@ -60,7 +60,18 @@ export const CartPromoCode = (props: CartPromoCodeProps) => {
           <div className={styles.promoStatesCol}>
             <div className={styles.promoStatesItem}>
               <strong>Subtotal:</strong>
-              <strong>${subtotal}</strong>
+              <div>
+                {discount.length > 0 ? (
+                  <del className={styles.crossed}> ${subtotal}</del>
+                ) : (
+                  <strong>${subtotal}</strong>
+                )}
+                {discount.length > 0 && (
+                  <strong>
+                    ${subtotal - (subtotal / 100) * discount.reduce((acc, val) => acc + val.sum, 0)}
+                  </strong>
+                )}
+              </div>
             </div>
 
             <div className={styles.promoStatesItem}>
