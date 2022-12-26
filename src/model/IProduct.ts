@@ -10,4 +10,5 @@ export interface IProduct {
     count: number;
   };
   amount: number;
+  totalPrice: number;
 }
