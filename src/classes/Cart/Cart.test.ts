@@ -33,24 +33,27 @@ describe('сlass Cart', () => {
     expect(cart.items).toEqual([]);
   });
   it('Should add new item to cart', () => {
-    const cart = new Cart();
-    const newCart = cart.addItem(item);
-    expect(newCart.items).toEqual([{ ...item, amount: 1 }]);
+    const cart = new Cart().addItem(item);
+    expect(cart.items).toEqual([
+      { ...item, amount: 1, totalPrice: Number((1 * item.price).toFixed(2)) },
+    ]);
   });
+
   it('Should add to cart a new product that is already in stock', () => {
-    const cart = new Cart();
-    const card1 = cart.addItem(item);
-    const card2 = card1.addItem(item);
-    expect(card2.items).toEqual([
+    const cart = new Cart().addItem(item).addItem(item);
+    expect(cart.items).toEqual([
       {
         ...item,
         amount: 2,
+        totalPrice: Number((2 * item.price).toFixed(2)),
       },
     ]);
   });
   it('Should remove the product by index', () => {
     const result = new Cart().addItem(item).removeItem(2).addItem(second);
-    expect(result.items).toEqual([{ ...second, amount: 1 }]);
+    expect(result.items).toEqual([
+      { ...second, amount: 1, totalPrice: Number((1 * item.price).toFixed(2)) },
+    ]);
   });
 
   it('Should delete item by index, if there are several of them, change the amount', () => {
@@ -59,6 +62,7 @@ describe('сlass Cart', () => {
       {
         ...item,
         amount: 3,
+        totalPrice: Number((3 * item.price).toFixed(2)),
       },
     ]);
   });
@@ -84,7 +88,7 @@ describe('сlass Cart', () => {
   });
 
   it('Should return the old instance if the element is not found', () => {
-    const cart = new Cart([{ ...second, amount: 1 }]).removeItem(2);
-    expect(cart.items).toEqual([{ ...second, amount: 1 }]);
+    const cart = new Cart([{ ...second, amount: 1, totalPrice: 22.3 }]).removeItem(2);
+    expect(cart.items).toEqual([{ ...second, amount: 1, totalPrice: 22.3 }]);
   });
 });
