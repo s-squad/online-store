@@ -1,8 +1,11 @@
-@mixin flex($direction, $justifyContent, $alignItems) {
+@mixin flex($justifyContent: center, $alignItems: center, $direction: row) {
   display: flex;
-  flex-direction: $direction;
   justify-content: $justifyContent;
   align-items: $alignItems;
+
+  @if $direction != row {
+    flex-direction: column;
+  }
 }
 
 @mixin scale($transitionDuration) {
