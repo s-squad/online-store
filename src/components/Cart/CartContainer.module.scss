@@ -1,9 +1,9 @@
 @use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
 
 .flexContainer {
-  display: flex;
+  @include flex(space-between, flex-start);
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .cart {
@@ -41,11 +41,9 @@
 
 .listItem {
   padding: 24px;
-  display: flex;
+  @include flex(space-between);
   border-bottom: 1px solid $color-gray-300;
-  align-items: center;
   gap: 22px;
-  justify-content: space-between;
   @media (max-width: $width-tablet-min) {
     flex-direction: column;
     gap: 30px;

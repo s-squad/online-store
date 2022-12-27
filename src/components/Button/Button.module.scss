@@ -1,10 +1,9 @@
 @use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
 
 .btn {
   color: $color-white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex();
   cursor: pointer;
   background-color: $color-primary;
   border: 1px solid transparent;

@@ -41,12 +41,12 @@ export const CartContainer = () => {
     );
 
     if (findTicket && ticket.includes(findTicket)) {
-      setMessage({ message: 'Oops, the promo code is already activated...', error: true });
+      setMessage({ message: 'Oops, this promo code was already applied...', error: true });
     } else if (findTicket) {
       setTicket((prev) => [...prev, findTicket]);
-      setMessage({ message: 'Promo code is activated!', error: false });
+      setMessage({ message: 'Promo code is applied!', error: false });
     } else {
-      setMessage({ message: 'There is no such promo code.', error: true });
+      setMessage({ message: 'Invalid promo code.', error: true });
     }
   };
 
