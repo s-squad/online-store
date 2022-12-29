@@ -1,3 +1,5 @@
+@use '../../assets/scss/variables' as *;
+
 .flexContainer {
   display: flex;
   justify-content: space-between;
@@ -5,24 +7,28 @@
   position: relative;
   padding: 30px 0;
 }
+
 .list {
   display: flex;
   align-items: center;
   gap: 40px;
+  @media (max-width: $width-tablet-max) {
+    display: none;
+  }
 }
 
 .listItem {
   list-style: none;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 160%;
-
-  color: #424551;
+  color: $color-gray-800;
 
   a {
     text-decoration: none;
   }
 }
+
 .userButtons {
   display: flex;
   align-items: center;
@@ -33,14 +39,14 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  color: #424551;
+  color: $color-gray-800;
 }
 
 .cart {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fff;
+  color: $color-white;
   position: relative;
 }
 .cartPrice {
@@ -49,11 +55,11 @@
   height: 20px;
   display: block;
   font-weight: 900;
-  font-size: 12px;
+  font-size: 1.2rem;
   line-height: 150%;
   position: absolute;
   top: 25px;
-  color: #ff4242;
+  color: $color-danger;
   right: 14px;
 }
 
@@ -62,30 +68,31 @@
   width: 23px;
   height: 20px;
   display: block;
-  background: #03cea4;
+  background: $color-success;
   border-radius: 4px;
   font-weight: 900;
-  font-size: 12px;
+  font-size: 1.2rem;
   line-height: 150%;
 }
+
 .link {
   text-decoration: none;
 }
 .sale {
   padding: 8px 0;
-  background: #17696a;
+  font-size: 1.2rem;
+  background-color: $color-primary;
   text-align: center;
-  color: #fff;
+  color: $color-white;
   a {
     color: inherit;
   }
 }
 .saleBold {
   font-weight: 900;
-  font-size: 12px;
   line-height: 150%;
 }
 
 .active {
-  color: #17696a;
+  color: $color-primary;
 }

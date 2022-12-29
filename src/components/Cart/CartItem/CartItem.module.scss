@@ -1,0 +1,139 @@
+@use '../../../assets/scss/variables' as *;
+
+.listItem {
+  padding: 24px;
+  display: flex;
+  border-bottom: 1px solid $color-gray-300;
+  align-items: center;
+  gap: 22px;
+  justify-content: space-between;
+  @media (max-width: $width-tablet-min) {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+.itemImage {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: cover;
+  object-position: center;
+  @media (max-width: $width-tablet-min) {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+.listItemDescr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  @media (max-width: $width-tablet-medium) {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 1em;
+    grid-template-areas:
+      'title title'
+      'label price';
+
+    strong {
+      justify-self: end;
+    }
+  }
+}
+
+.itemTitle {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 150%;
+  margin: 0;
+  grid-area: title;
+  @media (max-width: $width-tablet-min) {
+    font-size: 16px;
+  }
+}
+.cartButton {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 36px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.5px;
+  max-height: 36px;
+  color: $color-primary;
+  border: 1px solid $color-primary;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all ease-in-out 0.6s;
+  &:hover {
+    color: $color-white;
+    background-color: $color-primary;
+  }
+}
+
+.cartPrice {
+  list-style: none;
+  padding: 24px;
+  font-weight: 700;
+  line-height: 150%;
+  text-align: right;
+  color: $color-gray-900;
+  grid-area: price;
+}
+.label {
+  max-height: 36px;
+  max-width: 72px;
+  position: relative;
+  cursor: pointer;
+  flex-grow: 0;
+
+  @media (max-width: $width-tablet-medium) {
+    grid-area: label;
+  }
+
+  /* Remove default Arrows */
+  /* Chrome, Safari, Edge, Opera */
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.input {
+  background: $color-white;
+  border: 1px solid #d7dadd;
+  border-radius: 4px;
+  padding: 9px 12px;
+  width: 100%;
+  font-size: 1.2rem;
+  color: $color-gray-800;
+}
+
+.arrowBottom,
+.arrowTop {
+  position: absolute;
+  font-size: 1.2rem;
+  color: $color-gray-800;
+  cursor: pointer;
+  right: 10px;
+  border: none;
+  background-color: $color-white;
+}
+
+.arrowTop {
+  top: 3px;
+}
+
+.arrowBottom {
+  bottom: 3px;
+}
+
+.line {
+  border-top: 1px solid $color-gray-300;
+}

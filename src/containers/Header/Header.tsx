@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { CustomContainer } from '../CustomContainer';
@@ -7,11 +8,15 @@ import { Logo, Search } from '../../components';
 import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
 import { ReactComponent as HeartIcon } from '../../assets/icons/heart.svg';
 
+import { Cart } from '../../classes';
+
 import styles from './Header.module.scss';
 
 const listItems = ['Women', 'Men', 'Girls', 'Boys', 'Sale'];
 
 export const Header = () => {
+  const [cart] = useState<Cart>(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
+
   return (
     <header className={styles.header}>
       <CustomContainer>
@@ -41,9 +46,9 @@ export const Header = () => {
             </div>
             <Link to={'checkout'} className={styles.link}>
               <div className={styles.cart}>
-                <span className={styles.cartPrice}>1200</span>
+                <span className={styles.cartPrice}>{cart.price}</span>
                 <CartIcon />
-                <span className={styles.cartNum}>5</span>
+                <span className={styles.cartNum}>{cart.items.length}</span>
               </div>
             </Link>
           </div>

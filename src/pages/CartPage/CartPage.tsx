@@ -1,11 +1,12 @@
 import { CustomContainer } from '../../containers/CustomContainer';
-
-import styles from './CartPage.module.scss';
+import { CartContainer } from '../../components/Cart';
 
 export const CartPage = () => {
   return (
-    <section className={styles.main}>
-      <CustomContainer>CartPage</CustomContainer>
+    <section className='main'>
+      <CustomContainer>
+        <CartContainer />
+      </CustomContainer>
     </section>
   );
 };
