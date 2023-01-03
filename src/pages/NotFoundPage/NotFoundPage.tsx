@@ -5,7 +5,7 @@ import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage = () => {
   return (
-    <section className={styles.main}>
+    <section className='main'>
       <CustomContainer>
         <Htag tag='h1'>Page not found</Htag>
         <div className={styles.message}>
