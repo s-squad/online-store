@@ -1,0 +1,66 @@
+@use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
+
+.title {
+  margin: 3.2rem 0;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+.product {
+  padding-top: 3.2rem;
+  border-top: 1px solid $color-gray-300;
+  @include flex(space-between);
+  gap: 10.4rem;
+}
+
+.images {
+  @include flex(center, flex-start, column);
+  gap: 2rem;
+}
+
+.img {
+  @include bg-image;
+  background-size: contain;
+  border-radius: 4px;
+}
+
+.primary {
+  width: 60rem;
+  height: 60rem;
+}
+
+.preview {
+  @include flex();
+  gap: 2rem;
+  .img {
+    width: 10.4rem;
+    height: 10.4rem;
+  }
+}
+
+.info {
+  width: 100%;
+  align-self: flex-start;
+}
+
+.top {
+  @include flex(space-between);
+}
+
+.stars,
+.filledStars,
+.emptyStars {
+  @include flex();
+}
+.star {
+  width: 14px;
+  height: 14px;
+}
+.filledStar {
+  background-image: url(../../assets/icons/filledStar.svg);
+}
+
+.emptyStar {
+  background-image: url(../../assets/icons/emptyStar.svg);
+}
