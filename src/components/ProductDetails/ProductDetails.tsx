@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Htag } from '../Htag';
 
 import styles from './ProductDetails.module.scss';
+import { Button } from '../Button';
 
 // import { IProduct } from '../../model';
 
@@ -81,9 +82,9 @@ export const ProductDetails = () => {
         <div className={styles.info}>
           <div className={styles.top}>
             <div className={styles.price}>
-              <span className={styles.totalPrice}>{product?.totalPrice}</span>
-              <span className={styles.beforeSale}>{product?.price}</span>
-              <span className={styles.discount}>{product?.discountPercentage}</span>
+              <span className={styles.totalPrice}>${product?.totalPrice}</span>
+              <span className={styles.beforeSale}>${product?.price}</span>
+              <span className={styles.discount}>-{product?.discountPercentage}%</span>
             </div>
             <div className={styles.rating}>
               <div className={styles.stars}>
@@ -102,30 +103,71 @@ export const ProductDetails = () => {
                     })}
                 </div>
               </div>
-              <div className={styles.number}>{product?.rating}</div>
+              <div className={styles.ratingNumber}>{product?.rating}</div>
             </div>
           </div>
           <div className={styles.stock}>
-            <span>In stock:</span>
-            <span className={styles.count}></span>
-          </div>
-
-          <div className={styles.buttons}>
-            <div className={styles.input}></div>
-            <div className={styles.btn}></div>
+            <Htag tag='h3'>In stock</Htag>
+            <div className={styles.stockCount}>{product?.stock}</div>
           </div>
           <div className={styles.details}>
             <Htag tag='h3'>Details</Htag>
-            <div className={styles.description}></div>
+            <div className={styles.description}>{product?.description}</div>
+          </div>
+          <div className={styles.buttons}>
+            {/* <div className={styles.input}></div> */}
+            {/* <div className={styles.addToCart}> */}
+              <Button size='large' className={styles.btnAddToCart}>
+                <div className={styles.icon}></div>
+                Add to cart
+              </Button>
+            {/* </div> */}
+            {/* <div className={styles.btnBuyNow}> */}
+              <Button size='large' className={styles.btnBuyNow}>
+                Buy now
+              </Button>
+            {/* </div> */}
+          </div>
+          <div className={styles.delivery}>
+            <Htag tag='h3'>Delivery</Htag>
+            <div className={styles.deliveryText}>
+              Free standard shipping on orders <b>over $35</b> before tax, plus free returns.
+              <table className={styles.deliveryTable}>
+                <thead>
+                  <tr>
+                      <th className={styles.type}>TYPE</th>
+                      <th className={styles.howLong}>HOW LONG</th>
+                      <th className={styles.howMuch}>HOW MUCH</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td>Standard delivery</td>
+                      <td>1-4 business days</td>
+                      <td>$4.50</td>
+                  </tr>
+                  <tr>
+                      <td>Express delivery</td>
+                      <td>1 business day</td>
+                      <td>$10.00</td>
+                  </tr>
+                  <tr>
+                      <td>Pick up in store</td>
+                      <td>1-3 business days</td>
+                      <td>Free</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className={styles.return}>
             <Htag tag='h3'>Return</Htag>
             <div className={styles.returnText}>
               You have <b>60 days</b> to return the item(s) using any of the following methods:
               <br />
-              Free store return
+              - Free store return
               <br />
-              Free returns via USPS Dropoff Service
+              - Free returns via USPS Dropoff Service
               <br />
             </div>
           </div>
