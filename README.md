@@ -2,6 +2,10 @@
 
 Task: https://github.com/rolling-scopes-school/tasks/tree/master/tasks/online-store-team
 
+Deploy: https://s-squad-online-store.netlify.app/
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/13c38348-7007-4ca2-b027-adc742cef570/deploy-status)](https://app.netlify.com/sites/s-squad-online-store/deploys)
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
