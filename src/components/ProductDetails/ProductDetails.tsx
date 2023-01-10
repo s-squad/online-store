@@ -101,18 +101,13 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            {/* <div className={styles.input}></div> */}
-            {/* <div className={styles.addToCart}> */}
             <Button size='large' className={styles.btnAddToCart}>
               <div className={styles.icon}></div>
               Add to cart
             </Button>
-            {/* </div> */}
-            {/* <div className={styles.btnBuyNow}> */}
             <Button size='large' className={styles.btnBuyNow}>
               Buy now
             </Button>
-            {/* </div> */}
           </div>
           <div className={styles.delivery}>
             <Htag tag='h3'>Delivery</Htag>
