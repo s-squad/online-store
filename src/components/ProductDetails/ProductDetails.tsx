@@ -34,11 +34,12 @@ export const ProductDetails = () => {
       Math.round(product.price * (1 - product.discountPercentage / 100) * 100) / 100;
     product.filledStarsCount = Math.trunc(product.rating);
     product.emptyStarsCount = 5 - product.filledStarsCount;
+    product.images.splice(4);
   }
 
   const setActiveImage = (target: EventTarget) => {
     console.log(target);
-  }
+  };
 
   return (
     <div className={styles.flexContainer}>
@@ -100,18 +101,13 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            {/* <div className={styles.input}></div> */}
-            {/* <div className={styles.addToCart}> */}
-              <Button size='large' className={styles.btnAddToCart}>
-                <div className={styles.icon}></div>
-                Add to cart
-              </Button>
-            {/* </div> */}
-            {/* <div className={styles.btnBuyNow}> */}
-              <Button size='large' className={styles.btnBuyNow}>
-                Buy now
-              </Button>
-            {/* </div> */}
+            <Button size='large' className={styles.btnAddToCart}>
+              <div className={styles.icon}></div>
+              Add to cart
+            </Button>
+            <Button size='large' className={styles.btnBuyNow}>
+              Buy now
+            </Button>
           </div>
           <div className={styles.delivery}>
             <Htag tag='h3'>Delivery</Htag>
@@ -120,26 +116,26 @@ export const ProductDetails = () => {
               <table className={styles.deliveryTable}>
                 <thead>
                   <tr>
-                      <th className={styles.type}>TYPE</th>
-                      <th className={styles.howLong}>HOW LONG</th>
-                      <th className={styles.howMuch}>HOW MUCH</th>
+                    <th className={styles.type}>TYPE</th>
+                    <th className={styles.howLong}>HOW LONG</th>
+                    <th className={styles.howMuch}>HOW MUCH</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                      <td>Standard delivery</td>
-                      <td>1-4 business days</td>
-                      <td>$4.50</td>
+                    <td>Standard delivery</td>
+                    <td>1-4 business days</td>
+                    <td>$4.50</td>
                   </tr>
                   <tr>
-                      <td>Express delivery</td>
-                      <td>1 business day</td>
-                      <td>$10.00</td>
+                    <td>Express delivery</td>
+                    <td>1 business day</td>
+                    <td>$10.00</td>
                   </tr>
                   <tr>
-                      <td>Pick up in store</td>
-                      <td>1-3 business days</td>
-                      <td>Free</td>
+                    <td>Pick up in store</td>
+                    <td>1-3 business days</td>
+                    <td>Free</td>
                   </tr>
                 </tbody>
               </table>

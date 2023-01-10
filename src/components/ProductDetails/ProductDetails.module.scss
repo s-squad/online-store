@@ -162,6 +162,7 @@
   border-collapse: collapse;
   table-layout: fixed;
   margin-top: 1.4rem;
+  margin-bottom: 3rem;
 }
 
 thead {
@@ -176,7 +177,8 @@ tbody {
   color: $color-gray-800;
 }
 
-td, th {
+td,
+th {
   border-bottom: 1px solid $color-gray-300;
   height: 4.5rem;
 }
@@ -195,5 +197,5 @@ td, th {
 
 .return {
   line-height: 180%;
+  margin-bottom: 3rem;
 }
-
