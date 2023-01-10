@@ -30,8 +30,9 @@
 
 .border {
   border: 1px solid $color-primary;
+  background-color: $color-white;
   &:hover {
     color: #fff;
-    background-color: $color-primary;
+    background-color: inherit;
   }
 }

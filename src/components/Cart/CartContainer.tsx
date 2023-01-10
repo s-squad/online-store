@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Cart } from '../../classes';
-import { IProduct, ITicket } from '../../model';
+import { IProduct, ITicket, IProductFromCart } from '../../model';
 
 import { Htag } from '../Htag';
 
@@ -28,7 +28,7 @@ export const CartContainer = () => {
   const handleInputIncrement = (item: IProduct) => {
     setCart(cart.addItem(item));
   };
-  const deleteItem = (item: IProduct) => setCart(cart.fullRemoveItem(item));
+  const deleteItem = (item: IProductFromCart) => setCart(cart.fullRemoveItem(item));
   const comeBack = () => navigate(-1);
 
   const checkTickets = (event: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +72,7 @@ export const CartContainer = () => {
             {cart.items.length === 0 ? (
               <li className={styles.listItem}>Cart is empty 😔</li>
             ) : (
-              cart.items.map((item: IProduct) => {
+              cart.items.map((item: IProductFromCart) => {
                 return (
                   <CartItem
                     key={item.id}

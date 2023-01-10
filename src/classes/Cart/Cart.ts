@@ -1,22 +1,22 @@
-import { IProduct } from '../../model/IProduct';
+import { IProduct, IProductFromCart } from '../../model/IProduct';
 
 export class Cart {
-  private _items: IProduct[];
+  private _items: IProductFromCart[];
   private _fullPrice: number;
 
-  constructor(items: IProduct[] = []) {
+  constructor(items: IProductFromCart[] = []) {
     this._items = items;
     this._fullPrice = Number(this.setPrice().toFixed(2));
   }
 
-  get items(): IProduct[] {
+  get items(): IProductFromCart[] {
     return this._items;
   }
 
   private setPrice(): number {
     return this._items.reduce((acc, val) => acc + val.totalPrice, 0);
   }
-  addItem(product: Omit<IProduct, 'amount' | 'totalPrice'>): Cart {
+  addItem(product: IProduct): Cart {
     const existingId = this._items.findIndex((item) => item.id === product.id);
 
     if (existingId < 0) {
@@ -31,7 +31,7 @@ export class Cart {
     } else {
       return new Cart(
         this._items.map((item) => {
-          if (item.id === product.id) {
+          if (item.id === product.id && item.amount !== product.stock) {
             const newAmount = this._items[existingId].amount + 1;
             return {
               ...item,
@@ -69,7 +69,7 @@ export class Cart {
       );
     }
   }
-  fullRemoveItem(deleteItem: IProduct) {
+  fullRemoveItem(deleteItem: IProductFromCart) {
     return new Cart(this._items.filter((item) => item !== deleteItem));
   }
 

@@ -6,13 +6,10 @@ import { CustomContainer } from '../CustomContainer';
 import { Logo, Search } from '../../components';
 
 import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
-import { ReactComponent as HeartIcon } from '../../assets/icons/heart.svg';
 
 import { Cart } from '../../classes';
 
 import styles from './Header.module.scss';
-
-const listItems = ['Women', 'Men', 'Girls', 'Boys', 'Sale'];
 
 export const Header = () => {
   const [cart] = useState<Cart>(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
@@ -22,28 +19,8 @@ export const Header = () => {
       <CustomContainer>
         <div className={styles.flexContainer}>
           <Logo />
-          <nav>
-            <ul className={styles.list}>
-              {listItems.map((item) => {
-                return (
-                  <li className={styles.listItem} key={item}>
-                    <NavLink
-                      to={`products/${item.toLowerCase()}`}
-                      className={({ isActive }) => (isActive ? styles.active : '')}
-                    >
-                      {item}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
           <Search />
           <div className={styles.userButtons}>
-            <div className={styles.favorite}>
-              <HeartIcon />
-              <span className={styles.favoriteNum}>2</span>
-            </div>
             <Link to={'checkout'} className={styles.link}>
               <div className={styles.cart}>
                 <span className={styles.cartPrice}>{cart.price}</span>
