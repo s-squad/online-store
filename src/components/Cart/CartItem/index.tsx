@@ -10,7 +10,7 @@ export const CartItem = ({
 }: CartItemProps) => {
   return (
     <li className={styles.listItem} key={item.id}>
-      <img className={styles.itemImage} src={item.image} alt={item.title} />
+      <img className={styles.itemImage} src={item.images[0]} alt={item.title} />
       <div className={styles.listItemDescr}>
         <h4 className={styles.itemTitle}>{item.title}</h4>
         <label className={styles.label}>

@@ -3,12 +3,16 @@ export interface IProduct {
   title: string;
   price: number;
   description: string;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
   category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  thumbnail: string;
+  images: string[];
+}
+
+export interface IProductFromCart extends IProduct {
   amount: number;
   totalPrice: number;
 }
