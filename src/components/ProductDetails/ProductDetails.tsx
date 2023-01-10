@@ -5,27 +5,7 @@ import { Htag } from '../Htag';
 
 import styles from './ProductDetails.module.scss';
 import { Button } from '../Button';
-
-// import { IProduct } from '../../model';
-
-interface IProduct {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}
-
-interface IProductFromCart extends IProduct {
-  amount: number;
-  totalPrice: number;
-}
+import { IProductFromCart } from '../../model';
 
 interface IProductDetails extends IProductFromCart {
   filledStarsCount: number;
