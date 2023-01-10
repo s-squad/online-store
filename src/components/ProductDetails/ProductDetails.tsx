@@ -36,6 +36,10 @@ export const ProductDetails = () => {
     product.emptyStarsCount = 5 - product.filledStarsCount;
   }
 
+  const setActiveImage = (target: EventTarget) => {
+    console.log(target);
+  }
+
   return (
     <div className={styles.flexContainer}>
       <Htag tag='h1' className={styles.title}>
@@ -54,6 +58,7 @@ export const ProductDetails = () => {
                   key={ind}
                   className={styles.img}
                   style={{ backgroundImage: `url(${item})` }}
+                  onClick={(event) => setActiveImage(event.target)}
                 ></div>
               );
             })}

@@ -11,10 +11,14 @@
 .product {
   padding-top: 3.2rem;
   border-top: 1px solid $color-gray-300;
-  @include flex(space-between);
+  @include flex(space-between, flex-start);
   gap: 10.4rem;
   font-size: 1.6rem;
   line-height: 150%;
+
+  @media screen and (max-width: $width-tablet-max) {
+    gap: 3rem;
+  }
 }
 
 .images {
@@ -31,6 +35,11 @@
 .primary {
   width: 60rem;
   height: 60rem;
+
+  @media screen and (max-width: $width-tablet-max) {
+    width: 40rem;
+    height: 40rem;
+  }
 }
 
 .preview {
@@ -39,6 +48,11 @@
   .img {
     width: 10.4rem;
     height: 10.4rem;
+
+    @media screen and (max-width: $width-tablet-max) {
+      width: 8rem;
+      height: 8rem;
+    }
   }
 }
 
@@ -128,6 +142,11 @@
   font-family: 'Lato', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
+
+  @media screen and (max-width: $width-tablet-max) {
+    width: auto;
+    padding: 1rem 2rem;
+  }
 }
 
 .icon {
