@@ -5,6 +5,7 @@ import { Htag } from '../Htag';
 
 import styles from './ProductDetails.module.scss';
 import { Button } from '../Button';
+// import { Cart } from '../../classes';
 import { IProductFromCart } from '../../model';
 
 interface IProductDetails extends IProductFromCart {
@@ -15,6 +16,9 @@ interface IProductDetails extends IProductFromCart {
 export const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<IProductDetails>();
+  const [activeImgNum, setActiveImgNum] = useState<number>(0);
+
+  // const [cart, setCart] = useState(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -37,9 +41,9 @@ export const ProductDetails = () => {
     product.images.splice(4);
   }
 
-  const setActiveImage = (target: EventTarget) => {
-    console.log(target);
-  };
+  // const handleBtnAddItem = (item: IProduct) => {
+  //   setCart(cart.addItem(item));
+  // };
 
   return (
     <div className={styles.flexContainer}>
@@ -50,7 +54,7 @@ export const ProductDetails = () => {
         <div className={styles.images}>
           <div
             className={cn(styles.primary, styles.img)}
-            style={{ backgroundImage: `url(${product?.images[0]})` }}
+            style={{ backgroundImage: `url(${product?.images[activeImgNum]})` }}
           ></div>
           <div className={styles.preview}>
             {product?.images.map((item: string, ind: number) => {
@@ -59,7 +63,7 @@ export const ProductDetails = () => {
                   key={ind}
                   className={styles.img}
                   style={{ backgroundImage: `url(${item})` }}
-                  onClick={(event) => setActiveImage(event.target)}
+                  onClick={() => setActiveImgNum(ind)}
                 ></div>
               );
             })}
@@ -101,7 +105,7 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            <Button size='large' className={styles.btnAddToCart}>
+            <Button size='large' className={styles.btnAddToCart} onClick={() =>console.log('btn')}>
               <div className={styles.icon}></div>
               Add to cart
             </Button>
