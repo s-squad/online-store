@@ -17,5 +17,5 @@ export const Modal = ({ active, setActive, children }: ModalProps) => (
     >
       {children}
     </div>
-  </div >
+  </div>
 );
