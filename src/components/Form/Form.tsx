@@ -1,81 +1,210 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Htag } from '..';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Button, Htag } from '..';
+
 import { ReactComponent as VisaIcon } from '../../assets/icons/visa.svg';
 import { ReactComponent as MasterIcon } from '../../assets/icons/master-card.svg';
-import styles from './Form.module.scss'
+import { ReactComponent as AmericanExpressIcon } from '../../assets/icons/american-express.svg';
+import { ReactComponent as DiscoverIcon } from '../../assets/icons/discover-card.svg';
+
+import styles from './Form.module.scss';
+import cn from 'classnames';
+
+import {
+  isAddressValidate,
+  isPhoneValidate,
+  isEmailValidate,
+  isCardValidate,
+  isCardDateValidate,
+} from '../../utils';
+
+
+export interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  cardNumber: string;
+  cvc: string;
+  date: string;
+}
 
 export const Form = () => {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, },
     handleSubmit,
     reset,
-  } = useForm({
-    mode: 'onBlur',
+  } = useForm<FormValues>({
+    mode: 'onSubmit',
   });
-  const onSubmit = () => {
-    return 1
-  }
-  /* 
-  Реализован блок ввода персональной информации с валидацией +20
-  добавлено поле "Имя и Фамилия". Валидация: содержит не менее двух слов, длина каждого не менее 3 символов +5
-  добавлено поле "Номер телефона". Валидация: должно начинаться с '+', содержать только цифры и быть не короче 9 цифр +5
-  добавлено поле "Адрес доставки". Валидация: содержит не менее трех слов, длина каждого не менее 5 символов +5
-  добавлено поле "E-mail". Валидация: проверяется, является ли введенный текст электронной почтой +5
 
+  const onSubmit: SubmitHandler<FormValues> = () => {
+    if (isValid) {
+      reset()
+      alert('Order is processed')
+      localStorage.setItem('cart', JSON.stringify([]));
+      setTimeout(() => navigate('/'), 300)
+    }
+  };
 
-  Реализован блок ввода данных банковской карты с валидацией +20
-  реализован ввод номер карты. Валидация: кол-во введенных цифр должно быть ровно 16, допускается ввод только цифр +5
-  реализована автоматическая смена логотипа платежной системы. Например, если номер карты начинает с 4, устанавливается логотип Visa, если 5 - MasterCard. Реализовать не менее 3 платежных систем. +5
-  реализован блок ввода срока действия карты. Валидация: допускается ввод только цифр, месяц не может быть больше 12, длина поля должна быть равна 4. Например 12/25. Разделитель не учитывается и добавляется автоматически +5
-  реализован блок ввод CVV кода. Валидация: длина 3 символа, допускается ввод только цифр +5
-  Реализована кнопка завершения заказа +10
-  при клике на кнопку submit/confirm проверяются все поля на валидность, если у поля есть ошибки валидации, то рядом с этим полем выводится сообщение с ошибкой +5
-  при успешном прохождении валидации всех полей и нажатии на кнопку, выводится сообщение, что заказ оформлен. Затем, спустя 3-5 секунд происходит редирект на главную страницу магазина. Корзина при этом очищается +5 */
-  return <form action='#' onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-    <Htag tag='h2'>1. Shipping Method</Htag>
-    <div className={styles.gridContainer}>
-      <label className={styles.label}>
-        First Name
-        <input className={styles.input} type="text" name="firsName" id="firsName" placeholder='Your first name' />
-      </label>
-      <label className={styles.label}>
-        Last Name
-        <input className={styles.input} type="text" name="lastName" id="lastName" placeholder='Your last name' />
-      </label>
-      <label className={styles.label}>
-        Phone
-        <input className={styles.input} type="tel" name="lastName" id="phone" placeholder='Your phone number' />
-      </label>
-      <label className={styles.label}>
-        Address
-        <input className={styles.input} type="text" name="address" id="address" placeholder='Your address' />
-      </label>
-    </div>
-    <div>
-      <Htag tag='h2'>2. Payment Method</Htag>
-      <div className={styles.creditCard}>
-        <div className={styles.flexContainer}>
-          <Htag>
-            Credit card
-          </Htag>
-          <MasterIcon />
-          <VisaIcon />
-        </div>
+  const [cardFirstNumber, setCardFirstNumber] = useState();
+  const navigate = useNavigate()
+
+  return (
+    <form action='#' onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <Htag tag='h2'>1. Shipping Method</Htag>
+      <div className={styles.gridContainer}>
         <label className={styles.label}>
-          Card number
-          <input className={styles.input} type="number" name="cardNumber" id="cardNumber" placeholder='0000 0000 0000 0000' />
+          First Name
+          <input
+            className={styles.input}
+            placeholder='Your first name'
+            {...register('firstName', {
+              required: 'This field is required',
+              minLength: { value: 3, message: 'Must contain at least 3 letters' },
+            })}
+          />
+          {errors?.firstName && <div className={styles.error}>{errors?.firstName?.message}</div>}
         </label>
         <label className={styles.label}>
-          Expiry date
-          <input className={styles.input} type="date" name="cardDate" id="cardDate" placeholder='mm/yy' />
+          Last Name
+          <input
+            className={styles.input}
+            placeholder='Your last name'
+            {...register('lastName', {
+              required: 'This field is required',
+              minLength: { value: 3, message: 'Must contain at least 3 letters' },
+            })}
+          />
+          {errors?.lastName && <div className={styles.error}>{errors?.lastName?.message}</div>}
         </label>
         <label className={styles.label}>
-          CVC
-          <input className={styles.input} type="number" name="cardCvc" id="cardCvc" placeholder='000' />
+          Phone
+          <input
+            className={styles.input}
+            type='tel'
+            placeholder='Your phone number'
+            {...register('phone', {
+              required: 'This field is required',
+              validate: (value) => isPhoneValidate(value),
+            })}
+          />
+          {errors?.phone && (
+            <div className={styles.error}>
+              {errors?.phone?.message || 'Please enter a valid phone'}
+            </div>
+          )}
+        </label>
+        <label className={styles.label}>
+          Email
+          <input
+            className={styles.input}
+            placeholder='Your working email'
+            type='email'
+            {...register('email', {
+              required: 'This field is required',
+              validate: (value) => isEmailValidate(value),
+            })}
+          />
+          {errors?.email && (
+            <div className={styles.error}>
+              {errors?.email?.message || 'Please enter a valid email'}
+            </div>
+          )}
+        </label>
+        <label className={cn(styles.label, styles.labelFull)}>
+          Address
+          <input
+            className={styles.input}
+            placeholder='Your address'
+            {...register('address', {
+              required: 'This field is required',
+              validate: (value) => isAddressValidate(value),
+            })}
+          />
+          {errors?.address && (
+            <div className={styles.error}>
+              {errors?.address?.message || 'Please enter a valid address'}
+            </div>
+          )}
         </label>
       </div>
-    </div>
-
-  </form>;
+      <div>
+        <Htag tag='h2' className={styles.header}>
+          2. Payment Method
+        </Htag>
+        <div className={styles.creditCard}>
+          <div className={styles.flexContainer}>
+            <Htag>Credit card</Htag>
+            {cardFirstNumber === '6' && <DiscoverIcon height={40} width={40} />}
+            {cardFirstNumber === '5' && <MasterIcon height={40} width={40} />}
+            {cardFirstNumber === '4' && <VisaIcon height={40} width={40} />}
+            {cardFirstNumber === '3' && <AmericanExpressIcon height={40} width={40} />}
+          </div>
+          <label className={cn(styles.label, styles.cardNumbers)}>
+            Card number
+            <input
+              className={cn(styles.input, styles.cardInput)}
+              type='number'
+              placeholder='0000 0000 0000 0000'
+              {...register('cardNumber', {
+                required: 'This field is required',
+                onBlur(event) {
+                  setCardFirstNumber(event.target.value[0]);
+                },
+                validate: (value) => isCardValidate(value),
+              })}
+            />
+            {errors?.cardNumber && (
+              <div className={styles.error}>
+                {errors?.cardNumber?.message || 'Please enter a valid Card'}
+              </div>
+            )}
+          </label>
+          <label className={styles.label}>
+            Expiry date
+            <input
+              className={cn(styles.input, styles.cardInput)}
+              type='number'
+              placeholder='mm/yy'
+              {...register('date', {
+                required: 'This field is required',
+                validate: (value) => isCardDateValidate(value),
+              })}
+            />
+            {errors?.date && (
+              <div className={styles.error}>
+                {errors?.date?.message || 'Please enter a valid date'}
+              </div>
+            )}
+          </label>
+          <label className={styles.label}>
+            CVC
+            <input
+              className={styles.input}
+              {...register('cvc', {
+                required: 'This field is required',
+                minLength: { value: 3, message: 'Length less than 3 characters' },
+                maxLength: { value: 3, message: 'More than 3 characters long' },
+              })}
+              type='number'
+              placeholder='000'
+            />
+            {errors?.cvc && (
+              <div className={styles.error}>
+                {errors?.cvc?.message || 'Please enter a valid CVC'}
+              </div>
+            )}
+          </label>
+        </div>
+      </div>
+      <Button className={styles.formSubmit} size='large' type='submit'>
+        Submit
+      </Button>
+    </form>
+  );
 };

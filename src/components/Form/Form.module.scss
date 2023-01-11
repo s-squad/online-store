@@ -1,12 +1,16 @@
 @use '../../assets/scss/variables' as *;
 
-.gridContainer{
+.gridContainer {
   display: grid;
-  gap: 25px;
-  grid-template-rows: repeat(2, 1fr);
+  column-gap: 15px;
+  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    '. .'
+    '. .'
+    'Address Address';
 }
-.label{
+.label {
   font-weight: 400;
   font-size: 16px;
   line-height: 160%;
@@ -23,8 +27,44 @@
   font-size: 1.2rem;
   color: $color-gray-800;
 }
-.flexContainer{
+
+.labelFull {
+  grid-area: Address;
+}
+
+.formSubmit {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.cardInput {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+.error {
+  color: $color-danger;
+}
+.creditCard {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: repeat (2 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  column-gap: 15px;
+  grid-template-areas:
+    'cardIcons cardIcons'
+    'cardNumbers cardNumbers'
+    '. .';
+}
+.flexContainer {
   display: flex;
   gap: 20px;
   align-items: center;
+  grid-area: cardIcons;
+}
+
+.cardNumbers {
+  grid-area: cardNumbers;
 }
