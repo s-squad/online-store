@@ -2,13 +2,13 @@ import cn from 'classnames';
 
 import { Button } from '../../Button';
 import { Htag } from '../../Htag';
-
 import { CartPromoCodeProps } from './CartPromoCode.props';
 
 import styles from './CartPromoCode.module.scss';
 
 export const CartPromoCode = (props: CartPromoCodeProps) => {
-  const { onSubmit, discount, shipping, subtotal, message, setTicket, setMessage } = props;
+  const { onSubmit, discount, shipping, subtotal, message, setTicket, setMessage, openModal } =
+    props;
 
   const handleClickPromoCode = (id: number) => {
     const updatePromo = discount.filter((item) => item.id !== id);
@@ -108,7 +108,7 @@ export const CartPromoCode = (props: CartPromoCodeProps) => {
             </Htag>
           </div>
         </div>
-        <Button size='large' className={styles.promoComplete}>
+        <Button size='large' className={styles.promoComplete} onClick={() => openModal(true)}>
           Complete order
         </Button>
       </div>

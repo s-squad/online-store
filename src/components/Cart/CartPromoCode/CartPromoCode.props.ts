@@ -13,4 +13,5 @@ export interface CartPromoCodeProps {
   setTicket: (ticket: ITicket[]) => void;
   setMessage: (message: IMessage | null) => void;
   message: IMessage | null;
+  openModal: (value: boolean) => void;
 }
