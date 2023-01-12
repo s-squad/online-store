@@ -1,5 +1,15 @@
-import styles from './ProductDetailsPage.module.scss';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { ProductDetails } from '../../components/ProductDetails';
+import { CustomContainer } from '../../containers/CustomContainer';
+// import styles from './ProductDetailsPage.module.scss';
 
 export const ProductDetailsPage = () => {
-  return <div className={styles.main}>ProductDetailsPage</div>;
+  return (
+    <section className='main'>
+      <Breadcrumbs />
+      <CustomContainer>
+        <ProductDetails />
+      </CustomContainer>
+    </section>
+  );
 };

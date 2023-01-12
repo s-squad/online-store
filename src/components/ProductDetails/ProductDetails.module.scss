@@ -1,0 +1,212 @@
+@use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
+
+.title {
+  margin: 3.2rem 0;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.product {
+  padding-top: 3.2rem;
+  border-top: 1px solid $color-gray-300;
+  @include flex(space-between, flex-start);
+  gap: 10.4rem;
+  font-size: 1.6rem;
+  line-height: 150%;
+
+  @media screen and (max-width: $width-tablet-max) {
+    gap: 3rem;
+  }
+}
+
+.images {
+  @include flex(center, flex-start, column);
+  gap: 2rem;
+}
+
+.img {
+  @include bg-image;
+  background-size: contain;
+  border-radius: 4px;
+}
+
+.primary {
+  width: 60rem;
+  height: 60rem;
+
+  @media screen and (max-width: $width-tablet-max) {
+    width: 40rem;
+    height: 40rem;
+  }
+}
+
+.preview {
+  @include flex();
+  gap: 2rem;
+  .img {
+    width: 10.4rem;
+    height: 10.4rem;
+
+    @media screen and (max-width: $width-tablet-max) {
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+}
+
+.info {
+  width: 100%;
+  align-self: flex-start;
+}
+
+.top {
+  @include flex(space-between);
+  color: $color-gray-700;
+}
+
+.price {
+  @include flex(flex-start);
+  gap: 2rem;
+  margin-bottom: 2.4rem;
+}
+
+.totalPrice {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: $color-danger;
+}
+
+.beforeSale {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.discount {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $color-white;
+  background-color: $color-danger;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+}
+
+.stars,
+.filledStars,
+.emptyStars {
+  @include flex();
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+}
+
+.filledStar {
+  background-image: url(../../assets/icons/filledStar.svg);
+}
+
+.emptyStar {
+  background-image: url(../../assets/icons/emptyStar.svg);
+}
+
+.ratingNumber {
+  text-align: end;
+}
+
+.stock {
+  @include flex(flex-start);
+  gap: 3rem;
+}
+
+.stockCount {
+  font-size: 1.8rem;
+}
+
+.description {
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.buttons {
+  @include flex(flex-start);
+  gap: 2.4rem;
+  margin: 3.2rem 0;
+}
+
+.buttons button {
+  width: 24.4rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  @media screen and (max-width: $width-tablet-max) {
+    width: auto;
+    padding: 1rem 2rem;
+  }
+}
+
+.btnRemoveFromCart {
+  background-color: $color-white;
+  border: 1px solid $color-primary;
+  color: $color-primary;
+  &:hover {
+    background-color: $color-white;
+    border: 1px solid $color-success;
+    color: $color-success;
+  }
+}
+
+.iconAdd {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  background-image: url(../../assets/icons/whiteCart.svg);
+}
+
+.deliveryTable {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 1.4rem;
+  margin-bottom: 3rem;
+}
+
+thead {
+  text-align: left;
+  color: $color-gray-700;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+tbody {
+  color: $color-gray-800;
+}
+
+td,
+th {
+  border-bottom: 1px solid $color-gray-300;
+  height: 4.5rem;
+}
+
+.type {
+  width: 30%;
+}
+
+.howLong {
+  width: 30%;
+}
+
+.howMuch {
+  width: 15%;
+}
+
+.return {
+  line-height: 180%;
+  margin-bottom: 3rem;
+}

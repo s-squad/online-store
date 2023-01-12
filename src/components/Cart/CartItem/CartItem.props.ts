@@ -1,8 +1,8 @@
-import { IProduct } from '../../../model';
+import { IProductFromCart } from '../../../model';
 
 export interface CartItemProps {
-  item: IProduct;
-  handleInputIncrement: (item: IProduct) => void;
+  item: IProductFromCart;
+  handleInputIncrement: (item: IProductFromCart) => void;
   handleInputDecrement: (id: number) => void;
-  deleteItem: (item: IProduct) => void;
+  deleteItem: (item: IProductFromCart) => void;
 }
