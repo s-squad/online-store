@@ -75,6 +75,8 @@ export const StoreContainer = () => {
     const newOffset = (event.selected * Number(limit)) % applyFilters({ products, params }).length;
     setItemOffset(newOffset);
   };
+  const endOffset = itemOffset + +limit;
+  const correntItems = applyFilters({ products: products.slice(itemOffset, endOffset), params })
   const resetFilters = () => setSearchParams({});
   const copyLink = () => navigator.clipboard.writeText(window.location.href);
 
@@ -85,8 +87,7 @@ export const StoreContainer = () => {
       setSearchParams({ sort: target.value });
     }
   };
-  const [correntItems, setCorrentItems] = useState<IProduct[]>([]);
-  const endOffset = itemOffset + +limit;
+
   const changeLayout = () => {
     if (layout === 'grid') {
       setLayout('list');
@@ -99,7 +100,6 @@ export const StoreContainer = () => {
 
   useEffect(() => {
     setBrands(getFilters(correntItems, 'brand'));
-    setCorrentItems(applyFilters({ products: correntItems.slice(itemOffset, endOffset), params }));
     setCategories(getFilters(correntItems, 'category'));
     setPrice(getFiltersRange(correntItems, 'price'));
     setStock(getFiltersRange(correntItems, 'stock'));
@@ -113,9 +113,6 @@ export const StoreContainer = () => {
         setProducts(data.products);
         setBrands(getFilters(data.products, 'brand'));
         setCategories(getFilters(data.products, 'category'));
-        setCorrentItems(
-          applyFilters({ products: data.products.slice(itemOffset, endOffset), params }),
-        );
         setPrice(getFiltersRange(data.products, 'price'));
         setStock(getFiltersRange(data.products, 'stock'));
       } catch (error) {
