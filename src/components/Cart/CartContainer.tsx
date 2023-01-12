@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Cart } from '../../classes';
-import { IProduct, ITicket, IProductFromCart } from '../../model';
+import { IProduct, IProductFromCart, ITicket } from '../../model';
 
 import { Htag } from '../Htag';
 
 import styles from './CartContainer.module.scss';
 import { CartPromoCode } from './CartPromoCode';
 import { CartItem } from './CartItem';
+import { Modal } from '../Modal';
+import { Form } from '../Form';
 
 const tickets: ITicket[] = [
   { id: 1, ticket: 'happynewyear', sum: 15 },
@@ -30,7 +32,7 @@ export const CartContainer = () => {
   };
   const deleteItem = (item: IProductFromCart) => setCart(cart.fullRemoveItem(item));
   const comeBack = () => navigate(-1);
-
+  const [activeModal, setActiveModal] = useState(false);
   const checkTickets = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!event.target) return;
@@ -96,7 +98,11 @@ export const CartContainer = () => {
         setTicket={setTicket}
         subtotal={cart.price}
         message={message}
+        openModal={setActiveModal}
       />
+      <Modal active={activeModal} setActive={setActiveModal}>
+        <Form />
+      </Modal>
     </div>
   );
 };
