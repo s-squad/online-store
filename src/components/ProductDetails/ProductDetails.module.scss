@@ -149,11 +149,22 @@
   }
 }
 
-.icon {
+.btnRemoveFromCart {
+  background-color: $color-white;
+  border: 1px solid $color-primary;
+  color: $color-primary;
+  &:hover {
+    background-color: $color-white;
+    border: 1px solid $color-success;
+    color: $color-success;
+  }
+}
+
+.iconAdd {
   width: 16px;
   height: 16px;
-  background-image: url(../../assets/icons/whiteCart.svg);
   margin-right: 8px;
+  background-image: url(../../assets/icons/whiteCart.svg);
 }
 
 .deliveryTable {

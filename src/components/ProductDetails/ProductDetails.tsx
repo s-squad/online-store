@@ -42,19 +42,16 @@ export const ProductDetails = () => {
     saveLocalStorage();
   }, [cart]);
 
+  let isAdded;
   if (product) {
     product.images.splice(4);
     product.totalPrice =
       Math.round(product.price * (1 - product.discountPercentage / 100) * 100) / 100;
     product.filledStarsCount = Math.trunc(product.rating);
     product.emptyStarsCount = 5 - product.filledStarsCount;
-  }
 
-const handleBtnAddItem = (item: IProduct) => {
-  if (item) {
-    setCart(cart.addItem(item));
+    isAdded = cart.items.some((element) => element.id === product.id);
   }
-}
 
   return (
     <div className={styles.flexContainer}>
@@ -116,17 +113,30 @@ const handleBtnAddItem = (item: IProduct) => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            <Button
+            {!isAdded ? (
+              <Button
               size='large'
               className={styles.btnAddToCart}
               onClick={() => {
                 if (productForCart) {
-                  handleBtnAddItem(productForCart);
+                  setCart(cart.addItem(productForCart));
                 }
               }}>
-              <div className={styles.icon}></div>
+              <div className={styles.iconAdd}></div>
               Add to cart
             </Button>
+            ) : (
+              <Button
+                size='large'
+                className={styles.btnRemoveFromCart}
+                onClick={() => {
+                  if (productForCart) {
+                    setCart(cart.removeItem(productForCart.id));
+                  }
+                }}>
+                Remove from cart
+              </Button>
+            )}
             <Button size='large' className={styles.btnBuyNow}>
               Buy now
             </Button>
