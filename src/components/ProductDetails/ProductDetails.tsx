@@ -115,16 +115,17 @@ export const ProductDetails = () => {
           <div className={styles.buttons}>
             {!product?.isAdded ? (
               <Button
-              size='large'
-              className={styles.btnAddToCart}
-              onClick={() => {
-                if (productForCart) {
-                  setCart(cart.addItem(productForCart));
-                }
-              }}>
-              <div className={styles.iconAdd}></div>
-              Add to cart
-            </Button>
+                size='large'
+                className={styles.btnAddToCart}
+                onClick={() => {
+                  if (productForCart) {
+                    setCart(cart.addItem(productForCart));
+                  }
+                }}
+              >
+                <div className={styles.iconAdd}></div>
+                Add to cart
+              </Button>
             ) : (
               <Button
                 size='large'
@@ -133,21 +134,24 @@ export const ProductDetails = () => {
                   if (productForCart) {
                     setCart(cart.removeItem(productForCart.id));
                   }
-                }}>
+                }}
+              >
                 Remove from cart
               </Button>
             )}
-            <Button size='large' className={styles.btnBuyNow}
+            <Button
+              size='large'
+              className={styles.btnBuyNow}
               onClick={() => {
                 if (!product?.isAdded && productForCart) {
                   setCart(cart.addItem(productForCart));
                 }
                 setTimeout(() => {
                   navigate('/checkout');
-                }, 100)
+                }, 100);
               }}
-              >
-               Buy now
+            >
+              Buy now
             </Button>
           </div>
           <div className={styles.delivery}>

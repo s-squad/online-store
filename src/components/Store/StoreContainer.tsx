@@ -33,7 +33,7 @@ export const StoreContainer = () => {
     category: searchParams.get('category') || '',
     descr: searchParams.get('descr') || '',
     rating: searchParams.get('rating') || '',
-    stock: searchParams.get('rating') || ''
+    stock: searchParams.get('rating') || '',
   };
 
   const [price, setPrice] = useState<number[]>([20, 1500]);
