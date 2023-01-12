@@ -22,7 +22,7 @@ export const StoreContainer = () => {
   const [layout, setLayout] = useState<string>(searchParams.get('layout') ?? 'grid');
   const [brands, setBrands] = useState<{ name: string; count: number }[]>([]);
   const [categories, setCategories] = useState<{ name: string; count: number }[]>([]);
-  const [sortProperty, setSortProperty] = useState('');
+  const [sortProperty, setSortProperty] = useState(searchParams.get('sort') ?? 'name');
   const [limit, setLimit] = useState<string>(localStorage.getItem('limit') ?? '12');
   const [toggleVisabilityFilter, setToggleVisabilityFilter] = useState<boolean>(true);
 
