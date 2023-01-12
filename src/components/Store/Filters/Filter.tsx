@@ -18,7 +18,7 @@ export const Filters = ({
 }: FiltersProps) => {
   const [priceVal, setPriceVal] = useState<number | number[]>(priceRange);
   const [stockVal, setStockVal] = useState<number | number[]>(stockRange);
-
+  const [copyActive, setCopyActive] = useState<boolean>(false);
   const filters = [
     { title: 'Categoryes', array: categories, filter: 'category' },
     { title: 'Brands', array: brands, filter: 'brand' },
@@ -35,7 +35,10 @@ export const Filters = ({
     <div className={cn(styles.filters)}>
       <div className={styles.filtersButtons}>
         <Button onClick={resetFilters}>Reset Filters</Button>
-        <Button onClick={copyLink}>Copy Link</Button>
+        <Button onClick={() => {
+          setCopyActive(prev => !prev)
+          copyLink()
+        }}>{!copyActive ? 'Copy Link' : 'Сopied'}</Button>
       </div>
       {filters.map((item, id) => (
         <Accordion key={id} title={item.title}>
@@ -69,11 +72,11 @@ export const Filters = ({
               handleChange={
                 item.title === 'Price'
                   ? (value) => {
-                      setPriceVal(value);
-                    }
+                    setPriceVal(value);
+                  }
                   : (value) => {
-                      setStockVal(value);
-                    }
+                    setStockVal(value);
+                  }
               }
               key={item.title}
               min={item.value.initialValue[0]}

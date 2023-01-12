@@ -115,6 +115,7 @@ export const StoreContainer = () => {
         setCategories(getFilters(data.products, 'category'));
         setPrice(getFiltersRange(data.products, 'price'));
         setStock(getFiltersRange(data.products, 'stock'));
+
       } catch (error) {
         console.error(error);
       }
@@ -163,8 +164,10 @@ export const StoreContainer = () => {
                   setLimit((prev) => String(Number(prev) + 1));
                   localStorage.setItem('limit', String(Number(limit) + 1));
                 } else if (event.key === 'ArrowDown') {
-                  setLimit((prev) => String(Number(prev) - 1));
-                  localStorage.setItem('limit', String(Number(limit) - 1));
+                  if (!(Number(limit) <= 1)) {
+                    setLimit((prev) => String(Number(prev) - 1));
+                    localStorage.setItem('limit', String(Number(limit) - 1));
+                  }
                 } else {
                   return;
                 }
@@ -182,8 +185,10 @@ export const StoreContainer = () => {
             </button>
             <button
               onClick={() => {
-                setLimit((prev) => String(Number(prev) - 1));
-                localStorage.setItem('limit', String(Number(limit) - 1));
+                if (!(Number(limit) <= 1)) {
+                  setLimit((prev) => String(Number(prev) - 1));
+                  localStorage.setItem('limit', String(Number(limit) - 1));
+                }
               }}
               className={styles.arrowBottom}
             >
