@@ -20,7 +20,6 @@ import {
   isCardDateValidate,
 } from '../../utils';
 
-
 export interface FormValues {
   firstName: string;
   lastName: string;
@@ -35,7 +34,7 @@ export interface FormValues {
 export const Form = () => {
   const {
     register,
-    formState: { errors, isValid, },
+    formState: { errors, isValid },
     handleSubmit,
     reset,
   } = useForm<FormValues>({
@@ -44,15 +43,15 @@ export const Form = () => {
 
   const onSubmit: SubmitHandler<FormValues> = () => {
     if (isValid) {
-      reset()
-      alert('Order is processed')
+      reset();
+      alert('Order is processed');
       localStorage.setItem('cart', JSON.stringify([]));
-      setTimeout(() => navigate('/'), 300)
+      setTimeout(() => navigate('/'), 300);
     }
   };
 
   const [cardFirstNumber, setCardFirstNumber] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <form action='#' onSubmit={handleSubmit(onSubmit)} className={styles.form}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Htag } from '../Htag';
 
@@ -11,10 +11,12 @@ import { IProduct, IProductFromCart } from '../../model';
 interface IProductDetails extends IProductFromCart {
   filledStarsCount: number;
   emptyStarsCount: number;
+  isAdded: boolean;
 }
 
 export const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<IProductDetails>();
   const [productForCart, setProductForCart] = useState<IProduct>();
   const [activeImgNum, setActiveImgNum] = useState<number>(0);
@@ -42,15 +44,13 @@ export const ProductDetails = () => {
     saveLocalStorage();
   }, [cart]);
 
-  let isAdded;
   if (product) {
     product.images.splice(4);
     product.totalPrice =
       Math.round(product.price * (1 - product.discountPercentage / 100) * 100) / 100;
     product.filledStarsCount = Math.trunc(product.rating);
     product.emptyStarsCount = 5 - product.filledStarsCount;
-
-    isAdded = cart.items.some((element) => element.id === product.id);
+    product.isAdded = cart.items.some((element) => element.id === product.id);
   }
 
   return (
@@ -113,18 +113,19 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            {!isAdded ? (
+            {!product?.isAdded ? (
               <Button
-              size='large'
-              className={styles.btnAddToCart}
-              onClick={() => {
-                if (productForCart) {
-                  setCart(cart.addItem(productForCart));
-                }
-              }}>
-              <div className={styles.iconAdd}></div>
-              Add to cart
-            </Button>
+                size='large'
+                className={styles.btnAddToCart}
+                onClick={() => {
+                  if (productForCart) {
+                    setCart(cart.addItem(productForCart));
+                  }
+                }}
+              >
+                <div className={styles.iconAdd}></div>
+                Add to cart
+              </Button>
             ) : (
               <Button
                 size='large'
@@ -133,11 +134,23 @@ export const ProductDetails = () => {
                   if (productForCart) {
                     setCart(cart.removeItem(productForCart.id));
                   }
-                }}>
+                }}
+              >
                 Remove from cart
               </Button>
             )}
-            <Button size='large' className={styles.btnBuyNow}>
+            <Button
+              size='large'
+              className={styles.btnBuyNow}
+              onClick={() => {
+                if (!product?.isAdded && productForCart) {
+                  setCart(cart.addItem(productForCart));
+                }
+                setTimeout(() => {
+                  navigate('/checkout');
+                }, 100);
+              }}
+            >
               Buy now
             </Button>
           </div>

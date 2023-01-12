@@ -4,12 +4,7 @@ import styles from './SliderRange.module.scss';
 
 import { SliderRangeProps } from './SliderRange.props';
 
-export const SliderRange = ({
-  sliderValues,
-  handleChange,
-  min,
-  max,
-}: SliderRangeProps) => {
+export const SliderRange = ({ sliderValues, handleChange, min, max }: SliderRangeProps) => {
   return (
     <div className={styles.sliderContainer}>
       <div className={styles.sliderText}>
