@@ -5,8 +5,8 @@ import { Htag } from '../Htag';
 
 import styles from './ProductDetails.module.scss';
 import { Button } from '../Button';
-// import { Cart } from '../../classes';
-import { IProductFromCart } from '../../model';
+import { Cart } from '../../classes';
+import { IProduct, IProductFromCart } from '../../model';
 
 interface IProductDetails extends IProductFromCart {
   filledStarsCount: number;
@@ -16,9 +16,10 @@ interface IProductDetails extends IProductFromCart {
 export const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<IProductDetails>();
+  const [productForCart, setProductForCart] = useState<IProduct>();
   const [activeImgNum, setActiveImgNum] = useState<number>(0);
 
-  // const [cart, setCart] = useState(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
+  const [cart, setCart] = useState(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -26,6 +27,7 @@ export const ProductDetails = () => {
         const response = await fetch(`https://dummyjson.com/products/${id}`);
         const data = await response.json();
         setProduct(data);
+        setProductForCart(data);
       } catch (error) {
         console.error(error);
       }
@@ -33,17 +35,26 @@ export const ProductDetails = () => {
     getProductsList();
   }, []);
 
+  useEffect(() => {
+    const saveLocalStorage = () => {
+      localStorage.setItem('cart', JSON.stringify(cart.items));
+    };
+    saveLocalStorage();
+  }, [cart]);
+
   if (product) {
+    product.images.splice(4);
     product.totalPrice =
       Math.round(product.price * (1 - product.discountPercentage / 100) * 100) / 100;
     product.filledStarsCount = Math.trunc(product.rating);
     product.emptyStarsCount = 5 - product.filledStarsCount;
-    product.images.splice(4);
   }
 
-  // const handleBtnAddItem = (item: IProduct) => {
-  //   setCart(cart.addItem(item));
-  // };
+const handleBtnAddItem = (item: IProduct) => {
+  if (item) {
+    setCart(cart.addItem(item));
+  }
+}
 
   return (
     <div className={styles.flexContainer}>
@@ -105,7 +116,14 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            <Button size='large' className={styles.btnAddToCart} onClick={() =>console.log('btn')}>
+            <Button
+              size='large'
+              className={styles.btnAddToCart}
+              onClick={() => {
+                if (productForCart) {
+                  handleBtnAddItem(productForCart);
+                }
+              }}>
               <div className={styles.icon}></div>
               Add to cart
             </Button>
