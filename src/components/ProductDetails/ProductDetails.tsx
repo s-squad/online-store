@@ -5,7 +5,8 @@ import { Htag } from '../Htag';
 
 import styles from './ProductDetails.module.scss';
 import { Button } from '../Button';
-import { IProductFromCart } from '../../model';
+import { Cart } from '../../classes';
+import { IProduct, IProductFromCart } from '../../model';
 
 interface IProductDetails extends IProductFromCart {
   filledStarsCount: number;
@@ -15,6 +16,10 @@ interface IProductDetails extends IProductFromCart {
 export const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<IProductDetails>();
+  const [productForCart, setProductForCart] = useState<IProduct>();
+  const [activeImgNum, setActiveImgNum] = useState<number>(0);
+
+  const [cart, setCart] = useState(new Cart(JSON.parse(localStorage.getItem('cart') ?? '[]')));
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -22,6 +27,7 @@ export const ProductDetails = () => {
         const response = await fetch(`https://dummyjson.com/products/${id}`);
         const data = await response.json();
         setProduct(data);
+        setProductForCart(data);
       } catch (error) {
         console.error(error);
       }
@@ -29,17 +35,23 @@ export const ProductDetails = () => {
     getProductsList();
   }, []);
 
+  useEffect(() => {
+    const saveLocalStorage = () => {
+      localStorage.setItem('cart', JSON.stringify(cart.items));
+    };
+    saveLocalStorage();
+  }, [cart]);
+
+  let isAdded;
   if (product) {
+    product.images.splice(4);
     product.totalPrice =
       Math.round(product.price * (1 - product.discountPercentage / 100) * 100) / 100;
     product.filledStarsCount = Math.trunc(product.rating);
     product.emptyStarsCount = 5 - product.filledStarsCount;
-    product.images.splice(4);
-  }
 
-  const setActiveImage = (target: EventTarget) => {
-    console.log(target);
-  };
+    isAdded = cart.items.some((element) => element.id === product.id);
+  }
 
   return (
     <div className={styles.flexContainer}>
@@ -50,7 +62,7 @@ export const ProductDetails = () => {
         <div className={styles.images}>
           <div
             className={cn(styles.primary, styles.img)}
-            style={{ backgroundImage: `url(${product?.images[0]})` }}
+            style={{ backgroundImage: `url(${product?.images[activeImgNum]})` }}
           ></div>
           <div className={styles.preview}>
             {product?.images.map((item: string, ind: number) => {
@@ -59,7 +71,7 @@ export const ProductDetails = () => {
                   key={ind}
                   className={styles.img}
                   style={{ backgroundImage: `url(${item})` }}
-                  onClick={(event) => setActiveImage(event.target)}
+                  onClick={() => setActiveImgNum(ind)}
                 ></div>
               );
             })}
@@ -101,10 +113,30 @@ export const ProductDetails = () => {
             <div className={styles.description}>{product?.description}</div>
           </div>
           <div className={styles.buttons}>
-            <Button size='large' className={styles.btnAddToCart}>
-              <div className={styles.icon}></div>
+            {!isAdded ? (
+              <Button
+              size='large'
+              className={styles.btnAddToCart}
+              onClick={() => {
+                if (productForCart) {
+                  setCart(cart.addItem(productForCart));
+                }
+              }}>
+              <div className={styles.iconAdd}></div>
               Add to cart
             </Button>
+            ) : (
+              <Button
+                size='large'
+                className={styles.btnRemoveFromCart}
+                onClick={() => {
+                  if (productForCart) {
+                    setCart(cart.removeItem(productForCart.id));
+                  }
+                }}>
+                Remove from cart
+              </Button>
+            )}
             <Button size='large' className={styles.btnBuyNow}>
               Buy now
             </Button>
