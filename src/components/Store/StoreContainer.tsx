@@ -33,8 +33,15 @@ export const StoreContainer = () => {
     category: searchParams.get('category') || '',
     descr: searchParams.get('descr') || '',
     rating: searchParams.get('rating') || '',
-    stock: searchParams.get('rating') || '',
+    stock: searchParams.get('stock') || '',
   };
+
+/*   const searchNameParam = searchParams.get('name');
+  const searchBrandParam = searchParams.get('brand');
+  const searchCategoryParam = searchParams.get('category');
+  const searchDescrParam = searchParams.get('descr');
+  const searchRatingParam = searchParams.get('rating');
+  const searchStockParam = searchParams.get('stock'); */
 
   const [price, setPrice] = useState<number[]>([20, 1500]);
   const [stock, setStock] = useState<number[]>([0, 100]);
@@ -76,7 +83,8 @@ export const StoreContainer = () => {
     setItemOffset(newOffset);
   };
   const endOffset = itemOffset + +limit;
-  const correntItems = applyFilters({ products: products.slice(itemOffset, endOffset), params });
+  const correntItems = applyFilters({ products, params });
+
   const resetFilters = () => setSearchParams({});
   const copyLink = () => navigator.clipboard.writeText(window.location.href);
 
@@ -98,13 +106,13 @@ export const StoreContainer = () => {
     }
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     setBrands(getFilters(correntItems, 'brand'));
     setCategories(getFilters(correntItems, 'category'));
     setPrice(getFiltersRange(correntItems, 'price'));
     setStock(getFiltersRange(correntItems, 'stock'));
   }, [itemOffset, limit, searchParams]);
-
+ */
   useEffect(() => {
     const getProductsList = async () => {
       try {
@@ -235,7 +243,7 @@ export const StoreContainer = () => {
             handleChange={handleChange}
           />
         )}
-        <CardList items={correntItems} layout={layout} />
+        <CardList items={correntItems.slice(itemOffset, endOffset)} layout={layout} />
       </div>
     </>
   );

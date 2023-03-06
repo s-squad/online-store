@@ -7,7 +7,6 @@ export interface applyFiltersProps {
 export function applyFilters({ products, params }: applyFiltersProps): IProduct[] {
   const filteredProducts: IProduct[] = [];
   const { name, sort, descr, brand, category, rating, stock } = params;
-
   for (const product of products) {
     if (name && !product.title.toLowerCase().includes(name)) {
       continue;
@@ -15,10 +14,10 @@ export function applyFilters({ products, params }: applyFiltersProps): IProduct[
     if (descr && !product.description.toLowerCase().includes(descr)) {
       continue;
     }
-    if (brand && brand.split(',').includes(product.brand)) {
+    if (brand && !brand.split(',').includes(product.brand.toLowerCase())) {
       continue;
     }
-    if (category && !category.split(',').includes(product.category)) {
+    if (category && !category.split(',').includes(product.category.toLowerCase())) {
       continue;
     }
     if (rating && product.rating !== Number(rating)) {
@@ -29,7 +28,6 @@ export function applyFilters({ products, params }: applyFiltersProps): IProduct[
     }
     filteredProducts.push(product);
   }
-
   return filteredProducts.sort((a, b) => {
     const { title, price, rating, stock, discountPercentage } = a;
     const {
