@@ -94,17 +94,19 @@ export const StoreContainer = () => {
     if (target) {
       setSortProperty(target.value);
       searchParams.set('sort', target.value);
+      setSearchParams(searchParams);
     }
   };
 
   const changeLayout = () => {
     if (layout === 'grid') {
       setLayout('list');
-      setSearchParams({ layout: 'list' });
+      searchParams.set('layout', 'list');
     } else {
       setLayout('grid');
-      setSearchParams({ layout: 'grid' });
+      searchParams.set('layout', 'grid');
     }
+    setSearchParams(searchParams);
   };
 
   /*   useEffect(() => {
