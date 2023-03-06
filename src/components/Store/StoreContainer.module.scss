@@ -7,7 +7,6 @@
   @include flex(space-between);
   @media screen and (max-width: $width-tablet-max) {
     max-height: none;
-    @include flex();
     gap: 2rem;
     flex-wrap: wrap;
   }
@@ -22,6 +21,9 @@
 .iconsContainer{
   display: flex;
   gap: 2rem;
+  @media screen and (max-width: $width-tablet-max) {
+    margin: 0 auto
+  }
 }
 
 .flexContainer {
