@@ -34,9 +34,10 @@ export const StoreContainer = () => {
     descr: searchParams.get('descr') || '',
     rating: searchParams.get('rating') || '',
     stock: searchParams.get('stock') || '',
+    price: searchParams.get('price') || '',
   };
 
-/*   const searchNameParam = searchParams.get('name');
+  /*   const searchNameParam = searchParams.get('name');
   const searchBrandParam = searchParams.get('brand');
   const searchCategoryParam = searchParams.get('category');
   const searchDescrParam = searchParams.get('descr');
@@ -92,7 +93,7 @@ export const StoreContainer = () => {
     const { target } = event;
     if (target) {
       setSortProperty(target.value);
-      setSearchParams({ sort: target.value });
+      searchParams.set('sort', target.value);
     }
   };
 
@@ -106,7 +107,7 @@ export const StoreContainer = () => {
     }
   };
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     setBrands(getFilters(correntItems, 'brand'));
     setCategories(getFilters(correntItems, 'category'));
     setPrice(getFiltersRange(correntItems, 'price'));
