@@ -23,9 +23,11 @@ export const Header = () => {
           <div className={styles.userButtons}>
             <Link to={'checkout'} className={styles.link}>
               <div className={styles.cart}>
-                <span className={styles.cartPrice}>{cart.price}</span>
+                {cart.price !== 0 && <span className={styles.cartPrice}>{cart.price}</span>}
                 <CartIcon />
-                <span className={styles.cartNum}>{cart.items.length}</span>
+                {cart.items.length !== 0 && (
+                  <span className={styles.cartNum}>{cart.items.length}</span>
+                )}
               </div>
             </Link>
           </div>

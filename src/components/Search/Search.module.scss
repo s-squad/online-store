@@ -1,7 +1,18 @@
+@use '../../assets/scss/variables' as *;
+
 .search {
   display: flex;
   align-items: center;
   gap: 20px;
+  margin: 0 auto;
+
+  @media screen and (max-width: $width-tablet-medium) {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+  }
 }
 
 .label {
@@ -11,6 +22,9 @@
   position: relative;
   width: 380px;
   border-radius: 4px;
+  @media screen and (max-width: $width-tablet-medium) {
+    width: 100%;
+  }
 }
 
 .icon {
