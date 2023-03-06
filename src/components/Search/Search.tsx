@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import { ESearchBy } from '../../model';
 import { Select } from '../Select';
 
 import styles from './Search.module.scss';
@@ -14,7 +15,7 @@ export const Search = () => {
     const target = event.target as HTMLInputElement;
     if (!event) return;
     if (event.key === 'Enter') {
-      setSearchParams({ [selectVal || 'name']: target.value.toLowerCase() });
+      setSearchParams({ [selectVal || ESearchBy.NAME]: target.value.toLowerCase() });
       setSearchVal('');
     }
   };
@@ -41,13 +42,13 @@ export const Search = () => {
         name='sort'
         value={selectVal}
         options={[
-          { value: 'name', key: '1', text: 'name' },
-          { value: 'brand', key: '2', text: 'brand' },
-          { value: 'price', key: '3', text: 'price' },
-          { value: 'category', key: '4', text: 'category' },
-          { value: 'stock', key: '5', text: 'stock' },
-          { value: 'rating', key: '6', text: 'rating' },
-          { value: 'descr', key: '7', text: 'description' },
+          { value: ESearchBy.NAME, key: '1', text: 'name' },
+          { value: ESearchBy.BRAND, key: '2', text: 'brand' },
+          { value: ESearchBy.PRICE, key: '3', text: 'price' },
+          { value: ESearchBy.CATEGORY, key: '4', text: 'category' },
+          { value: ESearchBy.STOCK, key: '5', text: 'stock' },
+          { value: ESearchBy.RATING, key: '6', text: 'rating' },
+          { value: ESearchBy.DESCR, key: '7', text: 'description' },
         ]}
         placeholder='Find by'
         onChange={handleChangeSearch}
