@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { Accordion, Button } from '../../';
 import { SliderRange } from '../../SliderRange';
@@ -19,6 +20,20 @@ export const Filters = ({
   const [priceVal, setPriceVal] = useState<number | number[]>(priceRange);
   const [stockVal, setStockVal] = useState<number | number[]>(stockRange);
   const [copyActive, setCopyActive] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleRange = (title: string, value: number[] | number) => {
+    let str;
+    if (Array.isArray(value)) {
+      const [min, max] = value;
+      str = `${min}⟷${max}`;
+    } else {
+      str = String(value);
+    }
+    searchParams.set(title.toLowerCase(), str);
+    setSearchParams(searchParams);
+  };
+
   const filters = [
     { title: 'Categoryes', array: categories, filter: 'category' },
     { title: 'Brands', array: brands, filter: 'brand' },
@@ -35,10 +50,14 @@ export const Filters = ({
     <div className={cn(styles.filters)}>
       <div className={styles.filtersButtons}>
         <Button onClick={resetFilters}>Reset Filters</Button>
-        <Button onClick={() => {
-          setCopyActive(prev => !prev)
-          copyLink()
-        }}>{!copyActive ? 'Copy Link' : 'Сopied'}</Button>
+        <Button
+          onClick={() => {
+            setCopyActive((prev) => !prev);
+            copyLink();
+          }}
+        >
+          {!copyActive ? 'Copy Link' : 'Сopied'}
+        </Button>
       </div>
       {filters.map((item, id) => (
         <Accordion key={id} title={item.title}>
@@ -72,11 +91,13 @@ export const Filters = ({
               handleChange={
                 item.title === 'Price'
                   ? (value) => {
-                    setPriceVal(value);
-                  }
+                      handleRange(item.title, value);
+                      setPriceVal(value);
+                    }
                   : (value) => {
-                    setStockVal(value);
-                  }
+                      handleRange(item.title, value);
+                      setStockVal(value);
+                    }
               }
               key={item.title}
               min={item.value.initialValue[0]}
