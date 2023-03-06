@@ -9,13 +9,14 @@ import styles from './Search.module.scss';
 export const Search = () => {
   const [searchVal, setSearchVal] = useState('');
   const [selectVal, setSelectVal] = useState('');
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     if (!event) return;
     if (event.key === 'Enter') {
-      setSearchParams({ [selectVal || ESearchBy.NAME]: target.value.toLowerCase() });
+      searchParams.append(selectVal || ESearchBy.NAME, target.value.toLowerCase())
+      setSearchParams(searchParams)
       setSearchVal('');
     }
   };
