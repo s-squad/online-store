@@ -6,7 +6,10 @@ export interface applyFiltersProps {
 }
 export function applyFilters({ products, params }: applyFiltersProps): IProduct[] {
   const filteredProducts: IProduct[] = [];
-  const { name, sort, descr, brand, category, rating, stock } = params;
+  const { name, sort, descr, brand, category, rating, stock, price } = params;
+  const [minStock, maxStock] = stock.split('⟷');
+  const [minPrice, maxPrice] = price.split('⟷');
+
   for (const product of products) {
     if (name && !product.title.toLowerCase().includes(name)) {
       continue;
@@ -23,7 +26,29 @@ export function applyFilters({ products, params }: applyFiltersProps): IProduct[
     if (rating && product.rating !== Number(rating)) {
       continue;
     }
-    if (stock && product.stock !== Number(stock)) {
+    if (
+      stock &&
+      !(
+        (minStock &&
+          product.stock >= Number(minStock) &&
+          maxStock &&
+          product.stock <= Number(maxStock)) ||
+        (!maxStock && product.stock === Number(minStock))
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      price &&
+      !(
+        (minPrice &&
+          product.price >= Number(minPrice) &&
+          maxPrice &&
+          product.price <= Number(maxPrice)) ||
+        (!maxPrice && product.price === Number(minPrice))
+      )
+    ) {
       continue;
     }
     filteredProducts.push(product);
