@@ -5,18 +5,47 @@
   margin: 32px 0;
   max-height: 44px;
   @include flex(space-between);
+  @media screen and (max-width: $width-tablet-max) {
+    max-height: none;
+    @include flex();
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+.hideBtn{
+  @media screen and (max-width: $width-tablet-medium) {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.iconsContainer{
+  display: flex;
+  gap: 2rem;
 }
 
 .flexContainer {
   display: flex;
   justify-content: space-evenly;
   gap: 60px;
+  @media screen and (max-width: $width-tablet-medium) {
+    flex-direction: column;
+  }
 }
-
+.settings__inputs {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2em;
+  @media screen and (max-width: $width-tablet-medium) {
+    display: block;
+  }
+}
 .inputContainer {
   display: flex;
   gap: 12px;
   align-items: center;
+  padding-bottom: 1rem;
+
 }
 .label {
   max-height: 36px;
@@ -39,7 +68,7 @@
   border-radius: 4px;
   padding: 9px 12px;
   max-width: 72px;
-  font-size: 1.2rem;
+  font-size: 1em;
   color: $color-gray-800;
 }
 
