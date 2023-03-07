@@ -1,9 +1,6 @@
 @use '../../assets/scss/variables' as *;
 @use '../../assets/scss/mixins' as *;
 
-.details {
-  width: 345px;
-}
 .details[open] > .summary {
   color: #333;
 }

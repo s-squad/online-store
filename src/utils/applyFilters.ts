@@ -6,7 +6,9 @@ export interface applyFiltersProps {
 }
 export function applyFilters({ products, params }: applyFiltersProps): IProduct[] {
   const filteredProducts: IProduct[] = [];
-  const { name, sort, descr, brand, category, rating, stock } = params;
+  const { name, sort, descr, brand, category, rating, stock, price } = params;
+  const [minStock, maxStock] = stock.split('⟷');
+  const [minPrice, maxPrice] = price.split('⟷');
 
   for (const product of products) {
     if (name && !product.title.toLowerCase().includes(name)) {
@@ -15,21 +17,42 @@ export function applyFilters({ products, params }: applyFiltersProps): IProduct[
     if (descr && !product.description.toLowerCase().includes(descr)) {
       continue;
     }
-    if (brand && brand.split(',').includes(product.brand)) {
+    if (brand && !brand.split(',').includes(product.brand.toLowerCase())) {
       continue;
     }
-    if (category && !category.split(',').includes(product.category)) {
+    if (category && !category.split(',').includes(product.category.toLowerCase())) {
       continue;
     }
     if (rating && product.rating !== Number(rating)) {
       continue;
     }
-    if (stock && product.stock !== Number(stock)) {
+    if (
+      stock &&
+      !(
+        (minStock &&
+          product.stock >= Number(minStock) &&
+          maxStock &&
+          product.stock <= Number(maxStock)) ||
+        (!maxStock && product.stock === Number(minStock))
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      price &&
+      !(
+        (minPrice &&
+          product.price >= Number(minPrice) &&
+          maxPrice &&
+          product.price <= Number(maxPrice)) ||
+        (!maxPrice && product.price === Number(minPrice))
+      )
+    ) {
       continue;
     }
     filteredProducts.push(product);
   }
-
   return filteredProducts.sort((a, b) => {
     const { title, price, rating, stock, discountPercentage } = a;
     const {
