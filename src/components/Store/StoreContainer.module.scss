@@ -1,0 +1,119 @@
+@use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
+
+.settings {
+  margin: 32px 0;
+  max-height: 44px;
+  @include flex(space-between);
+  @media screen and (max-width: $width-tablet-max) {
+    max-height: none;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+.hideBtn{
+  @media screen and (max-width: $width-tablet-medium) {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.iconsContainer{
+  display: flex;
+  gap: 2rem;
+  @media screen and (max-width: $width-tablet-max) {
+    margin: 0 auto
+  }
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 60px;
+  @media screen and (max-width: $width-tablet-medium) {
+    flex-direction: column;
+  }
+}
+.settings__inputs {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2em;
+  @media screen and (max-width: $width-tablet-medium) {
+    display: block;
+  }
+}
+.inputContainer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 1rem;
+
+}
+.label {
+  max-height: 36px;
+  position: relative;
+  cursor: pointer;
+
+  /* Remove default Arrows */
+  /* Chrome, Safari, Edge, Opera */
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.input {
+  background: $color-white;
+  border: 1px solid #d7dadd;
+  border-radius: 4px;
+  padding: 9px 12px;
+  max-width: 72px;
+  font-size: 1em;
+  color: $color-gray-800;
+}
+
+.arrowBottom,
+.arrowTop {
+  position: absolute;
+  font-size: 1.2rem;
+  color: $color-gray-800;
+  cursor: pointer;
+  right: 10px;
+  border: none;
+  background-color: $color-white;
+}
+
+.arrowTop {
+  top: 3px;
+}
+
+.arrowBottom {
+  bottom: 3px;
+}
+
+.line {
+  border-top: 1px solid $color-gray-300;
+}
+
+/* pagination */
+.paginate {
+  list-style: none;
+  @include flex();
+  gap: 5px;
+}
+.paginateItem {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  transition: all ease-in-out 0.4s;
+  &:hover {
+    border: 1px solid $color-primary;
+  }
+}
+.active {
+  color: $color-white;
+  background-color: $color-primary-hover;
+}

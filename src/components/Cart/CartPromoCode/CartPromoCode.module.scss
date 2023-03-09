@@ -1,0 +1,88 @@
+@use '../../../assets/scss/variables' as *;
+
+.promoFlexContainer {
+  margin-top: 30px;
+  width: 390px;
+  color: $color-gray-800;
+  margin-bottom: 50px;
+  @media (max-width: $width-tablet-max) {
+    flex-basis: 100%;
+  }
+}
+
+.promoInputContainer {
+  margin-top: 16px;
+  display: flex;
+}
+
+.promoStates {
+  background: $color-gray-200;
+  border-radius: 4px;
+  padding: 24px;
+}
+.promoStatesCol {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  padding: 16px 0;
+  border-top: 1px solid $color-gray-300;
+}
+.promoStatesItem {
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.promoLabel {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.promoSubmit {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.promoInput {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 12px 16px;
+}
+
+.promoComplete {
+  width: 100%;
+  text-align: center;
+}
+
+.promoCodeTextList {
+  padding: 0;
+  display: flex;
+  gap: 1em;
+  list-style: none;
+}
+
+.promoMessage {
+  display: inline-block;
+  padding: 1rem 0;
+}
+
+.promoCodeTextItem {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid $color-gray-300;
+}
+
+.error {
+  color: $color-danger;
+}
+
+.succes {
+  color: $color-success;
+}
+
+.crossed {
+  padding: 0.5rem;
+}

@@ -1,0 +1,41 @@
+@use '../../assets/scss/variables' as *;
+.modal {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: opacity ease-in 700ms;
+}
+.modalOpen {
+  display: flex;
+  opacity: 100;
+  background-color: $color-gray-600;
+  pointer-events: auto;
+}
+.modalClose {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.modalContainer {
+  width: 75%;
+  max-width: 600px;
+  min-height: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: $color-white;
+  transition: transform ease-in 700ms;
+}
+.modalContainerOpen {
+  transform: scale(1);
+}
+.modalContainerClose {
+  opacity: 0;
+  transform: scale(0);
+}

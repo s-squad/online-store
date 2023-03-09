@@ -1,0 +1,19 @@
+@use '../../assets/scss/variables' as *;
+
+.message {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  font-size: 2rem;
+  line-height: 180%;
+  color: $color-primary;
+  background: rgba(23, 105, 106, 0.06);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(23, 105, 106, 0.25);
+}
+
+.link {
+  margin-left: 10px;
+  font-weight: 700;
+  color: $color-primary;
+}

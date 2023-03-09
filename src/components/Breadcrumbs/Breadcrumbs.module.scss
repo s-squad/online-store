@@ -1,0 +1,31 @@
+@use '../../assets/scss/variables' as *;
+@use '../../assets/scss/mixins' as *;
+
+.breadcrumbs {
+  background-color: $color-gray-200;
+}
+
+.flexContainer {
+  @include flex(flex-start);
+  height: 53px;
+  gap: 0.8rem;
+}
+
+.arrow {
+  background-image: url(../../assets/icons/arrow.svg);
+  @include bg-image;
+  width: 6px;
+  height: 10px;
+}
+
+.category,
+.title {
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.title {
+  font-weight: 400;
+  color: $color-gray-600;
+}

@@ -1,0 +1,35 @@
+@import-normalize;
+
+@import './assets/scss/mixins';
+@import './assets/scss/variables';
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  color: $color-gray-800;
+  scroll-behavior: smooth;
+
+  @media screen and (max-width: $width-tablet-medium) {
+    font-size: 9px;
+  }
+
+  @media screen and (max-width: $width-mobile-max) {
+    font-size: 7px;
+  }
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8rem;
+}
+
+.main {
+  flex-grow: 1;
+}

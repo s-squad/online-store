@@ -1,0 +1,21 @@
+@use '../../../assets/scss/mixins' as *;
+.productsList {
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.list {
+  @include flex(center, stretch, column);
+}
+
+.itemList {
+  @include flex(space-evenly, space-evenly);
+  flex-direction: row;
+  max-width: 100%;
+}
